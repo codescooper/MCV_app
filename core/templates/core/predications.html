@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>predications</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'agenda' %}">Agenda</a></li>
+            <li><a href="{% url 'predications' %}">Prédications</a></li>
+            <li><a href="{% url 'contacts' %}">Contacts</a></li>
+        </ul>
+    </nav>
+    <h1>predications de l'Église MCV</h1>
+    <ul>
+        {% for predication in predications %}
+            <li>
+                <strong>{{ predication.titre }}</strong> - Prêché par {{ predication.orateur }} le {{ predication.date|date:"d M Y" }}<br>
+                {% if predication.audio_url %}
+                    <a href="{{ predication.audio_url }}">Écouter le predication</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>Aucune prédication disponible.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
